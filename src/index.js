@@ -5,9 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 // import FoodList from "./components/food/FoodList";
 
+import {QueryClient, QueryClientProvider} from "react-query";
+const queryClient=new QueryClient()
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <App />
+    <QueryClientProvider client={queryClient}>
+        <App />
+    </QueryClientProvider>
+
 );
 
 // If you want to start measuring performance in your app, pass a function

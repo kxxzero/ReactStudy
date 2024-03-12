@@ -18,13 +18,13 @@
     => 다른 JS에서 사용 시 반드시 export를 설정
  */
 
-import {Fragment, useState, useEffect} from "react";
+import {Fragment,useState,useEffect} from "react";
 import axios from "axios";
 import {Link, useParams} from "react-router-dom";
 
 function BoardDetail() {
-    const{no}=useParams()
-    const{detail, setDetail}=useState({})
+    const {no}=useParams()
+    const [detail,setDetail]=useState({})
     /*
         - List => [{}, {}, {}, ...] => useState([])
         - VO => {} useState({})
@@ -32,19 +32,19 @@ function BoardDetail() {
         - useState(true)
         - 문자열 useState('')
      */
-    useEffect(() => {
-        axios.get('http://localhost/board/detail_react', {
+    useEffect(()=>{
+        axios.get('http://localhost/board/detail_react',{
             params:{
                 no:no
             }
         }).then(response=>{
             setDetail(response.data)
         })
-    }, [])
+    },[])
 
     return (
         <div className={"row"}>
-            <h3 className={"tex-center"}>내용보기</h3>
+            <h3 className={"text-center"}>내용보기</h3>
             <table className={"table"}>
                 <tbody>
                 <tr>
@@ -64,15 +64,15 @@ function BoardDetail() {
                     <td colSpan={"3"}>{detail.subject}</td>
                 </tr>
                 <tr>
-                    <td className={"text-center"} height={"200"} colSpan={"4"} valign={"top"}>
-                        <pre style={{"whiteSpace": "pre-wrap", "backgroundColor": "#fff", "border": "none"}}>{detail.content}</pre>
+                    <td className={"text-left"} height={"200"} colSpan={"4"} valign={"top"}>
+                        <pre style={{"whiteSpace":"pre-wrap","backgroundColor":"white","border":"none"}}>{detail.content}</pre>
                     </td>
                 </tr>
                 <tr>
-                    <td className={"text-center"} colSpan={"4"}>
-                        <Link to={"/board/update/"+no} className={"btn btn-xs btn-info"}>수정</Link>
-                        <Link to={"/board/delete/"+no} className={"btn btn-xs btn-success"}>삭제</Link>
-                        <Link to={"/board/list/"+no} className={"btn btn-xs btn-warning"}>목록</Link>
+                    <td className={"text-right"} colSpan={"4"}>
+                        <Link to={"/board/update/"+no} className={"btn btn-info btn-xs"}>수정</Link>
+                        <Link to={"/board/delete/"+no} className={"btn btn-success btn-xs"}>삭제</Link>
+                        <Link to={"/board/list"} className={"btn btn-warning btn-xs"}>목록</Link>
                     </td>
                 </tr>
                 </tbody>

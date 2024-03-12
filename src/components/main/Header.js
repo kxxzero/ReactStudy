@@ -15,37 +15,37 @@ import {Link} from "react-router-dom";
 
 // 1번 방식) 함수 호출 방식
 function Header(){
+
     return (
-        // html이 위치하는 자리
         <nav className="navbar navbar-inverse">
             <div className="container-fluid">
                 <div className="navbar-header">
-                    <Link className="navbar-brand" to={"/"}>Router 연습</Link>
+                    <Link className="navbar-brand" to={"/"}>Router연습</Link>
                 </div>
                 <ul className="nav navbar-nav">
                     <li className="active"><Link to={"/"}>Home</Link></li>
-                <li className="dropdown">
-                    <Link className="dropdown-toggle" data-toggle="dropdown" to={"/"}>스토어<span className="caret"></span></Link>
-                    <ul className="dropdown-menu">
-                        <li><Link to={"/goods/all"}>전체 상품</Link></li>
-                        <li><Link to={"/goods/best"}>베스트 상품</Link></li>
-                        <li><Link to={"/goods/special"}>특가 상품</Link></li>
-                        <li><Link to={"/goods/new"}>신상품</Link></li>
-                    </ul>
-                </li>
 
-                <li className="dropdown"><a className="dropdown-toggle" data-toggle="dropdown" href="#">맛집<span
-                    className="caret"></span></a>
-                    <ul className="dropdown-menu">
-                        <li><Link to={"/food/list"}>맛집 목록</Link></li>
-                        <li><Link to={"/food/find"}>맛집 검색</Link></li>
-                    </ul>
-                </li>
-                <li><Link to={"/news/list"}>맛집 뉴스</Link></li>
-                <li><Link to={"/board/list"}>커뮤니티</Link></li>
-            </ul>
-        </div>
-    </nav>
+                    <li className="dropdown">
+                        <a className="dropdown-toggle" data-toggle="dropdown" href="#">스토어<span className="caret"></span></a>
+                        <ul className="dropdown-menu">
+                            <li><Link to={"/goods/all"}>전체 상품</Link></li>
+                            <li><Link to={"/goods/best"}>베스트 상품</Link></li>
+                            <li><Link to={"/goods/special"}>특가 상품</Link></li>
+                            <li><Link to={"/goods/new"}>신상품</Link></li>
+                        </ul>
+                    </li>
+                    <li className="dropdown">
+                        <a className="dropdown-toggle" data-toggle="dropdown" href="#">맛집<span className="caret"></span></a>
+                        <ul className="dropdown-menu">
+                            <li><Link to={"/food/list"}>맛집 목록</Link></li>
+                            <li><Link to={"/food/find"}>맛집 검색</Link></li>
+                        </ul>
+                    </li>
+                    <li><Link to={"/news/list"}>맛집 뉴스</Link></li>
+                    <li><Link to={"/board/list"}>커뮤니티</Link></li>
+                </ul>
+            </div>
+        </nav>
     )
 }
 

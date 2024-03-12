@@ -59,11 +59,8 @@
 
  */
 
-import {Fragment, useState, useEffect} from "react";
+import {Fragment,useState,useEffect} from "react";
 import axios from "axios";
-import {Link} from "react-router-dom";
-import FoodDetail from "./FoodDetail";
-
 /* global kakao */
 
 function FoodList(){
@@ -71,13 +68,13 @@ function FoodList(){
     const [totalpage, setTotalpage]=useState(0)
     const [startPage, setStartPage]=useState(0)
     const [endPage, setEndPage]=useState(0)
-    const [foodList, setFoodList]=useState([])
-    const [foodDetail, setFoodDetail]=useState({})
-    const [open, setOpen]=useState(false)
+    const [foodList,setFoodList]=useState([])
+    const [foodDetail,setFoodDetail]=useState({})
+    const [open,setOpen]=useState(false)
     
     // 값을 서버로부터 받아옴
     useEffect(() => {
-        axios.get('http://localhost/food/list_react', {
+        axios.get('http://localhost/food/list_react',{
             params:{
                 page:curpage
             }
@@ -94,15 +91,13 @@ function FoodList(){
         const script=document.createElement("script")
         // <script src=""></script>
         script.async=true
-        script.src="//dapi.kakao.com/v2/maps/sdk.js?appkey=666e34535b94b665d2f33b3ee94a689a&libraries=services\""
+        script.src="//dapi.kakao.com/v2/maps/sdk.js?appkey=666e34535b94b665d2f33b3ee94a689a&libraries=services"
         document.head.appendChild(script)
-
         /*
             <head>
                 <script src=""></script>
             </head>
          */
-
         script.onload=()=>{
             kakao.maps.load(()=>{
                 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
@@ -155,57 +150,58 @@ function FoodList(){
     const nextHandler=()=>{
         setCurpage(endPage+1)
     }
-
     const onFoodDetail=(vo)=>{
         setOpen(true)
         setFoodDetail(vo)
     }
 
     let html=foodList.map((vo) =>
-        <div className={"col-md-4"}>
+        <div className="col-md-4">
             <div className="thumbnail">
                 <img src={'http://www.menupan.com' + vo.poster} style={{"width": "100%"}} onClick={()=>onFoodDetail(vo)}/>
-                <div className={"caption"}>
+                <div className="caption">
                     <p>{vo.name}</p>
                 </div>
             </div>
         </div>
     )
-
     let row=[]
+
     if(startPage>1) {
         row.push(<li><a href={"#"} onClick={()=>prevHandler()}>&laquo;</a></li>)
+
     }
-    for(let i=startPage; i<=endPage; i++) {
+    for(let i=startPage;i<=endPage;i++) {
         if(curpage===i) {
-            row.push(<li className={"active"}><a href={"#"} onClick={()=>pageChange(i)}>{i}</a></li>)
-        } else {
-            row.push(<li><a href={"#"} onClick={()=>pageChange(i)}>{i}</a></li>)
+            row.push(<li className={"active"}><a href={"#"} onClick={()=>pageChange(i)}>{i}</a></li> )
+        }
+        else {
+            row.push(<li><a href={"#"} onClick={()=>pageChange(i)}>{i}</a></li> )
         }
     }
-
     if(endPage<totalpage) {
         row.push(<li><a href={"#"} onClick={()=>nextHandler()}>&raquo;</a></li>)
     }
 
     return (
         <Fragment>
-        <div className={"row"}>
-            <div className={"col-sm-8"}>
-                {html}
-                <div style={{"height":"20px"}}></div>
-                <div className={"text-center"}>
-                    <ul className={"pagination"}>
-                        {row}
-                    </ul>
+            <div className={"row"}>
+                <div className={"col-sm-8"}>
+                    {html}
+                    <div style={{"height":"20px"}}></div>
+                    <div className={"text-center"}>
+                        <ul className={"pagination"}>
+                            {row}
+                        </ul>
+
+                    </div>
+                </div>
+                <div className={"col-sm-4"}>
+                    {open ? <Detail vo={foodDetail}/> : null}
+                    <div style={{"height": "10px"}}></div>
+                    <Maps/>
                 </div>
             </div>
-            <div className={"col-sm-4"}>
-                {open ? <Detail vo={foodDetail}/> : null}
-                <div style={{"height": "10px"}}></div>
-                <Maps/>
-            </div>
-        </div>
         </Fragment>
     )
 }
@@ -220,7 +216,7 @@ function Maps() {
 // 메인 => function ==> 여러개의  function을 사용할 수 있다
 // 연결시에 반드시 props를 이용한다
 function Detail(props) {
-    return(
+    return (
         <table className={"table"}>
             <tbody>
             <tr>

@@ -1,15 +1,15 @@
-import{Fragment, useState, useEffect} from "react";
+import {Fragment,useState,useEffect} from "react";
 import axios from "axios";
-import {Link} from "react-router-dom"
+import {Link} from "react-router-dom";
 
 function BoardList() {
-    const [curpage, setCurpage]=useState(1)
-    const [totalpage, setTotalpage]=useState(0)
-    const [boardList, setBoardList]=useState([])
+    const [curpage,setCurpage]=useState(1)
+    const [totalpage,setTotalpage]=useState(0)
+    const [boardList,setBoardList]=useState([])
 
     // 값을 서버로부터 받아옴
     useEffect(() => {
-        axios.get('http://localhost/board/list_react', {
+        axios.get('http://localhost/board/list_react',{
             params:{
                 page:curpage
             }
@@ -24,12 +24,15 @@ function BoardList() {
     let html=boardList.map((vo)=>
         <tr>
             <td className={"text-center"} width={"10%"}>{vo.no}</td>
-            <td width={"45%"}><Link to={"/board/detail/"+vo.no}>{vo.subject}</Link></td>
+            <td width={"45%"}>
+                <Link to={"/board/detail/" + vo.no}>{vo.subject}</Link>
+            </td>
             <td className={"text-center"} width={"15%"}>{vo.name}</td>
-            <td className={"text-center"} width={"20%"}>{vo.regdate.substring(0,vo.regdate.indexOf(" "))}</td>
+            <td className={"text-center"} width={"20%"}>{vo.regdate && vo.regdate.substring(0, vo.regdate.indexOf(" "))}</td>
             <td className={"text-center"} width={"10%"}>{vo.hit}</td>
         </tr>
     )
+
     return (
         <div className={"row"}>
             <h3 className={"text-center"}>게시판</h3>
@@ -52,15 +55,13 @@ function BoardList() {
                     <th className={"text-center"} width={"10%"}>조회수</th>
                 </tr>
                 </thead>
-
                 <tbody>
-                    {html}
+                {html}
                 </tbody>
-
                 <tfoot>
                 <tr>
                     <td colSpan={"5"} className={"text-center"}>
-                        <input type={"button"} value={"이전"} className={"btn-sm btn-danger"}/>
+                        <input type={"button"} className={"btn-sm btn-danger"} value={"이전"}/>
                         {curpage} page / {totalpage} pages
                         <input type={"button"} className={"btn-sm btn-danger"} value={"다음"}/>
                     </td>

@@ -1,11 +1,11 @@
-import {Fragment ,useState, useEffect, useRef} from "react";
-import {useParams, useNavigate} from "react-router-dom";
+import {Fragment,useState,useEffect,useRef} from "react";
+import {useParams,useNavigate} from "react-router-dom";
 import axios from "axios";
 
 function NewsList() {
     const nav=useNavigate()
-    const [fd, setFd]=useState('맛집')
-    const [newsList, setNewsList]=useState([])
+    const [fd,setFd]=useState('맛집')
+    const [newsList,setNewsList]=useState([])
     const fdRef=useRef(null)
 
     useEffect(() => {
@@ -57,7 +57,7 @@ function NewsList() {
                     <tbody>
                     <tr>
                         <td>
-                            <input type={"text"} ref={fdRef} value={fd} size={"20"} className={"input-sm"} onChange={fdChange}/>
+                            <input type={"text"} size={"20"} className={"input-sm"} ref={fdRef} value={fd} onChange={fdChange}/>
                             <input type={"button"} value={"검색"} className={"btn btn-sm btn-primary"} onClick={newsFind}/>
                         </td>
                     </tr>

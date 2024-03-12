@@ -4,13 +4,13 @@ import {useParams, useNavigate, Link} from "react-router-dom";
 
 function BoardDelete() {
     const {no} = useParams()
+    const nav=useNavigate()
     const [pwd,setPwd]=useState('')
     const pwdRef=useRef(null)
-    const nav=useNavigate()
-
     const pwdChange=(e)=>{
         setPwd(e.target.value)
     }
+
     const boarddel=()=>{
         if(pwd.trim()==="") {
             pwdRef.current.focus()
@@ -32,13 +32,14 @@ function BoardDelete() {
             }
         })
     }
+
     return (
         <div className={"row row1"}>
             <table className={"table"}>
                 <tbody>
                 <tr>
                     <td>
-                        비밀번호:<input type={"password"} ref={pwdRef} value={pwd} className={"input-sm"} onChange={pwdChange}/>
+                        비밀번호:<input type={"password"} className={"input-sm"} onChange={pwdChange} ref={pwdRef} value={pwd}/>
                     </td>
                 </tr>
 

@@ -7,8 +7,8 @@ function FoodFind() {
     const [totalpage, setTotalpage] = useState(0)
     const [startPage, setStartPage] = useState(0)
     const [endPage, setEndPage] = useState(0)
-    const [foodList, setFoodList] = useState([])
-    const [address, setAddress] = useState('마포')
+    const [foodList,setFoodList]=useState([])//[] , {}
+    const [address,setAddress]=useState('마포')
 
     useEffect(() => {
         axios.post('http://localhost/food/find_react', null, {
@@ -25,18 +25,18 @@ function FoodFind() {
         })
     }, [address, curpage]) // address나 curpage가 변경되면 다시 호출
 
-    let html=foodList.map((vo)=> (
-        <div className={"col-md-3"}>
+    let html=foodList.map((vo) =>
+        <div className="col-md-3">
             <div className="thumbnail">
-                <Link to={"/recipe/detail/"+vo.no}>
-                    <img src={'http://www.menupan.com'+vo.poster} title={vo.title} style={{"width":"100%"}}/>
-                    <div className={"caption"}>
+                <Link to={"/food/detail/" + vo.fno}>
+                    <img src={'http://www.menupan.com'+vo.poster}  style={{"width": "100%"}}/>
+                    <div className="caption">
                         <p>{vo.name}</p>
                     </div>
                 </Link>
             </div>
         </div>
-    ))
+    )
 
     // 검색
     const findHandler=()=>{
@@ -59,17 +59,18 @@ function FoodFind() {
     }
 
     let row=[]
-    if(startPage>1) {
+
+    if(startPage>1)  {
         row.push(<li><a href={"#"} onClick={()=>prevHandler()}>&laquo;</a></li>)
     }
-    for(let i=startPage; i<=endPage; i++) {
+    for(let i=startPage;i<=endPage;i++) {
         if(curpage===i) {
             row.push(<li className={"active"}><a href={"#"} onClick={()=>pageChange(i)}>{i}</a></li>)
-        } else {
+        }
+        else {
             row.push(<li><a href={"#"} onClick={()=>pageChange(i)}>{i}</a></li>)
         }
     }
-
     if(endPage<totalpage) {
         row.push(<li><a href={"#"} onClick={()=>nextHandler()}>&raquo;</a></li>)
     }
@@ -77,18 +78,14 @@ function FoodFind() {
     return (
         <Fragment>
             <div className={"row"}>
-                <input type={"text"} value={address} className={"input-sm"} size={"20"} placeholder={"검색어 입력"} onChange={changeHandler}/>
-                <input type={"button"} value={"검색"} className={"btn-sm btn-success"} onClick={findHandler}/>
+                <input type={"text"} size={"20"} className={"input-sm"} placeholder={"검색어 입력"} value={address} onChange={changeHandler}/>
+                <input type={"button"} className={"btn-sm btn-success"} value={"검색"} onClick={findHandler}/>
             </div>
-
-            <div style={{"height":"20px"}}></div>
-
+            <div style={{"height": "10px"}}></div>
             <div className={"row"}>
                 {html}
             </div>
-
-            <div style={{"height":"20px"}}></div>
-
+            <div style={{"height": "10px"}}></div>
             <div className={"row"}>
                 <div className={"text-center"}>
                     <ul className={"pagination"}>
